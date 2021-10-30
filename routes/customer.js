@@ -7,6 +7,23 @@ const customerSchema = mongoose.model("customer");
 
 const DB_URL = 'mongodb+srv://mohammedElmorsy:GAkDhy4ab6chLrNF@cluster0.abrtp.mongodb.net/dalia?retryWrites=true&w=majority';
 
+customerRoute.get('/', (req, res) => {
+    mongoose.connect(DB_URL)
+    .then(() => {
+        console.log("DB Connected");
+
+        customerSchema.find({})
+                        .then((customers) => {
+                            res.send(customers);
+                            mongoose.disconnect();
+                        })
+                        .catch((err) => console.log(err));
+    })
+    .catch((err) => {
+        console.log('error while connecting to db', err);
+    });
+});
+
 customerRoute.post('/add', (req, res) => {
     mongoose.connect(DB_URL)
         .then(() => {

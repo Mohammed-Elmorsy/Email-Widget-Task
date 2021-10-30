@@ -32,7 +32,7 @@ app.get('/',(req, res)=>{
     res.send('welcome in home page');
 });
 
-app.use('/customer', cutomerRoute);
+app.use('/customers', cutomerRoute);
 
 // error MW
 app.use((err, req, res, next)=>{
